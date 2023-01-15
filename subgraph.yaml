@@ -1,0 +1,62 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: DefiContribute
+    network: goerli
+    source:
+      address: "0xe744A46c6E20958e6c1d6B84D663Bc72Da44f596"
+      abi: DefiContribute
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AdminRevoke
+        - ApprovedDonee
+        - Donation
+        - DoneeRequestCanceled
+        - EliminatedDonee
+        - NewAdmin
+        - NewDonee
+        - NewDoneeRequest
+        - OwnershipTransferred
+        - ReadyToRemove
+        - RedFlag
+        - RejectedDonee
+        - SummedToThePool
+        - Withdrawal
+      abis:
+        - name: DefiContribute
+          file: ./abis/DefiContribute.json
+      eventHandlers:
+        - event: AdminRevoke(indexed address)
+          handler: handleAdminRevoke
+        - event: ApprovedDonee(indexed address)
+          handler: handleApprovedDonee
+        - event: Donation(indexed address,indexed address,indexed uint256)
+          handler: handleDonation
+        - event: DoneeRequestCanceled(indexed address)
+          handler: handleDoneeRequestCanceled
+        - event: EliminatedDonee(string,indexed uint256,indexed address)
+          handler: handleEliminatedDonee
+        - event: NewAdmin(indexed address)
+          handler: handleNewAdmin
+        - event: NewDonee(string,indexed uint256,indexed address,string)
+          handler: handleNewDonee
+        - event: NewDoneeRequest(indexed address,string)
+          handler: handleNewDoneeRequest
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: ReadyToRemove(string,indexed uint256,indexed address)
+          handler: handleReadyToRemove
+        - event: RedFlag(string,indexed uint256,address,indexed address)
+          handler: handleRedFlag
+        - event: RejectedDonee(indexed address)
+          handler: handleRejectedDonee
+        - event: SummedToThePool(indexed uint256)
+          handler: handleSummedToThePool
+        - event: Withdrawal(indexed uint256,indexed address,indexed uint256)
+          handler: handleWithdrawal
+      file: ./src/defi-contribute.ts
