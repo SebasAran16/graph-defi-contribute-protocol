@@ -1,6 +1,6 @@
 specVersion: 0.0.5
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: DefiContribute
@@ -30,7 +30,7 @@ dataSources:
         - Withdrawal
       abis:
         - name: DefiContribute
-          file: ./abis/DefiContribute.json
+          file: DefiContribute/abis/DefiContribute.json
       eventHandlers:
         - event: AdminRevoke(indexed address)
           handler: handleAdminRevoke
@@ -60,4 +60,4 @@ dataSources:
           handler: handleSummedToThePool
         - event: Withdrawal(indexed uint256,indexed address,indexed uint256)
           handler: handleWithdrawal
-      file: ./src/defi-contribute.ts
+      file: DefiContribute/DefiContribute.wasm
